@@ -3,6 +3,10 @@ const path = require('path');
 const fs = require('fs');
 const { execSync, spawn } = require('child_process');
 
+// Set custom application name for system integration / taskbar
+app.setName('transparent-timer');
+
+
 let mainWindow;
 let isClickThrough = false;
 let journalProcess;
@@ -16,6 +20,7 @@ function createWindow() {
   const { width, height } = primaryDisplay.workAreaSize;
 
   mainWindow = new BrowserWindow({
+    title: 'Transparent Timer',
     width: 320,
     height: 180,
     x: width - 340,
