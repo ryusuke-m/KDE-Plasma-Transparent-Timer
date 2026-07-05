@@ -1,0 +1,16 @@
+{
+  "name": "transparent-timer",
+  "version": "1.0.0",
+  "description": "A beautiful transparent floating timer with active window tracking for KDE Wayland",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Transparent Timer</title>
+  <!-- Beautiful Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Material Icons Round -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Drag Handle and Header -->
+    <header class="app-header">
+      <div class="drag-zone"></div>
+      <div class="window-controls">
+        <button id="btn-minimize" class="icon-btn tiny-btn"><span class="material-icons-round">remove</span></button>
+        <button id="btn-close" class="icon-btn tiny-btn close-danger"><span class="material-icons-round">close</span></button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+      <!-- 1. Timer Screen -->
+      <section id="screen-timer" class="screen active">
+        <div class="timer-display-wrapper">
+          <div id="timer-mode-badge" class="mode-badge">STOPWATCH</div>
+          <div id="timer-time" class="timer-time">00:00:00</div>
+          <div id="active-app-status" class="active-app-status">
+            <span class="material-icons-round status-pulse">visibility</span>
+            <span id="active-app-name" class="app-name">検出中...</span>
+          </div>
+        </div>
+
+        <div class="hover-controls">
+          <button id="btn-timer-toggle" class="icon-btn primary-btn"><span class="material-icons-round">play_arrow</span></button>
+          <button id="btn-timer-reset" class="icon-btn"><span class="material-icons-round">restart_alt</span></button>
+          <button id="btn-go-stats" class="icon-btn"><span class="material-icons-round">bar_chart</span></button>
+          <button id="btn-go-settings" class="icon-btn"><span class="material-icons-round">settings</span></button>
+        </div>
+      </section>
+
+      <!-- 2. Statistics (Visualization) Screen -->
+      <section id="screen-stats" class="screen">
+        <div class="screen-header">
+          <button id="btn-stats-back" class="icon-btn back-btn"><span class="material-icons-round">arrow_back</span></button>
+          <h2>使用時間ログ</h2>
+          <button id="btn-clear-stats" class="icon-btn text-danger-btn" title="データをクリア"><span class="material-icons-round">delete_forever</span></button>
+        </div>
+        <div class="stats-content">
+          <div class="chart-container">
+            <canvas id="time-chart"></canvas>
+          </div>
+          <div id="stats-summary-list" class="stats-summary-list">
+            <!-- Dynamic data will be generated here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Settings Screen -->
+      <section id="screen-settings" class="screen">
+        <div class="screen-header">
+          <button id="btn-settings-back" class="icon-btn back-btn"><span class="material-icons-round">arrow_back</span></button>
+          <h2>設定</h2>
+        </div>
+        <div class="settings-content">
+          <!-- Timer Mode Selection -->
+          <div class="settings-group">
+            <label>タイマーモード</label>
+            <div class="segmented-control">
+              <button id="mode-stopwatch" class="segment-btn active">ストップウォッチ</button>
+              <button id="mode-countdown" class="segment-btn">カウントダウン</button>
+            </div>
+          </div>
+
+          <!-- Countdown Target Time -->
+          <div id="settings-countdown-group" class="settings-group hidden">
+            <label>制限時間 (分)</label>
+            <div class="input-stepper">
+              <button id="btn-step-down" class="step-btn">-</button>
+              <input type="number" id="input-limit-minutes" value="30" min="1" max="720">
+              <button id="btn-step-up" class="step-btn">+</button>
+            </div>
+          </div>
+
+          <!-- Click Through Mode Toggle -->
+          <div class="settings-group toggle-row">
+            <div class="toggle-label-desc">
+              <span class="label">マウスクリック透過</span>
+              <span class="description">タイマー表示を透過し、後ろのアプリを直接操作できます。復帰はAlt+Tキーで行えます。</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-clickthrough">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="version-info">
+            Transparent Timer v1.0.0
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- App logic -->
+  <script src="renderer.js"></script>
+</body>
+</html>
