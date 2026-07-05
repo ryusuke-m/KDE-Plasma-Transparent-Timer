@@ -21,6 +21,7 @@ function createWindow() {
 
   mainWindow = new BrowserWindow({
     title: 'Transparent Timer',
+    icon: path.join(__dirname, 'icon.png'),
     width: 320,
     height: 180,
     x: width - 340,
